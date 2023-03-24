@@ -6,7 +6,7 @@ const CardItem = ({ item, onPress, onEditPress, selectedItem }) => {
   const showConfirmDialog = () => {
     return Alert.alert(
       "Are your sure?",
-      "Are you sure you want to Delete this User? This action cannot be undone!",
+      "Are you sure you want to Delete this Medicine? This action cannot be undone!",
       [
         {
           text: "Yes",
