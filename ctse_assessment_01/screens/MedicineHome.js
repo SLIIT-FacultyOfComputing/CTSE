@@ -19,7 +19,18 @@ const MyScreen = () => {
     setShowModal(true);
   };
 
-
+  const handleModalSubmit = async() => {
+    await push(ref(db, 'medicines'), {
+      name,
+      price,
+      quantity,
+      imageUrl
+    }).then(() => {
+      setShowModal(false);
+  }).catch((error) => {
+      alert(error.message)
+  });
+  };
 
   useEffect(() => {
     const usersRef = ref(db, "medicines");
