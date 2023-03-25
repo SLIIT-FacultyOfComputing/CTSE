@@ -38,6 +38,14 @@ export default function App() {
           name='ChannelCenters Home' 
           component={ChannelCenters} 
           options={{title: 'Channel Centers Manage'}}/>
+          <Stack.Screen 
+          name='AdverticingCardList Home' 
+          component={AdverticingCardList} 
+          options={{title: 'Adverticing Manage'}}/>
+                <Stack.Screen 
+          name='CreateAd' 
+          component={CreateAd} 
+          options={{title: 'Create adverticing'}}/>
       <Stack.Screen 
           name='AdverticingCardList Home' 
           component={AdverticingCardList} 
