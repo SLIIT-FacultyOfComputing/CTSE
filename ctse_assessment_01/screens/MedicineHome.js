@@ -5,7 +5,7 @@ import { ref, push, onValue } from "firebase/database";
 import CardList from '../components/CardList';
 import { db } from '../config';
 
-const MyScreen = () => {
+const MedicineManagementHome = () => {
   const [data, setData] = useState([]);
   const [showMedicineModal, setShowMedicineModal] = useState(false);
   const [name, setName] = useState('');
@@ -163,4 +163,4 @@ const styles = {
   },
 };
 //
-export default MyScreen;
+export default MedicineManagementHome;
