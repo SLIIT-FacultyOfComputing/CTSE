@@ -9,6 +9,7 @@ import MyScreen from './screens/MedicineHome';
 import AdverticingCardList from './screens/AdvertisingHome';
 import CreateAd from './screens/CreateNewAdvertising';
 import ChannelCenters from './screens/ChannelCenters';
+import CreateAd from './screens/CreateNewAdvertising';
 
 import SplashScreen from './components/SplashScreen';
 import React, { useState } from 'react';
