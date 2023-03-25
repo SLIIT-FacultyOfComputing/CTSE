@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 /* import screen for navigation */
 
 import Homepage from './screens/Homepage';
-import MyScreen from './screens/MedicineHome';
+import MedicineManagementHome from './screens/MedicineHome';
 
 /* create stack for navigation */
 const Stack = createNativeStackNavigator()
@@ -17,9 +17,9 @@ export default function App() {
           component={Homepage} 
           options={{title: 'Welcome'}}/>
       <Stack.Screen 
-          name='Medicne Home' 
-          component={MyScreen} 
-          options={{title: 'Medicne Management'}}/>
+          name='Medicine' 
+          component={MedicineManagementHome} 
+          options={{title: 'Medicine Management'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
