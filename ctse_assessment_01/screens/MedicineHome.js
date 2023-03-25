@@ -15,7 +15,7 @@ const MyScreen = () => {
     // Do something when a card is pressed
   };
 
-  const handleAddItemPress = () => {
+  const handleAddMedicine = () => {
     setShowModal(true);
   };
 
@@ -36,23 +36,22 @@ const MyScreen = () => {
     const usersRef = ref(db, "medicines");
 
     onValue(usersRef, (snapshot) => {
-        const users = [];
+        const medicines = [];
         snapshot.forEach((childSnapshot) => {
-            const user = {
+            const medicine = {
                 id: childSnapshot.key,
                 ...childSnapshot.val(),
             };
-            users.push(user);
+            medicines.push(medicine);
         });
-        setData(users);
-        // console.log(users)
+        setData(medicines);
     });
 }, []);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Medicine</Text>
-        <TouchableOpacity style={styles.addItemButton} onPress={handleAddItemPress}>
+        <TouchableOpacity style={styles.addItemButton} onPress={handleAddMedicine}>
           <Text style={styles.addItemButtonText}>+</Text>
         </TouchableOpacity>
       </View>
