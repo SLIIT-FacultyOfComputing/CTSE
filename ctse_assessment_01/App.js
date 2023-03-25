@@ -20,6 +20,10 @@ export default function App() {
           name='Medicine' 
           component={MedicineManagementHome} 
           options={{title: 'Medicine Management'}}/>
+          <Stack.Screen 
+          name='ChannelCenters Home' 
+          component={ChannelCenters} 
+          options={{title: 'Channel Centers Manage'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
