@@ -8,16 +8,16 @@ export default function Homepage({navigation}) {
       <Image source={require('../assets/mainlogo.png')} style={styles.logoimg} />
       </View>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Users List')}>
-        <Text style={styles.cardText}>User Management</Text>
+        <Text style={styles.cardText}>Update Doctors</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Medicne Home')}>
-        <Text style={styles.cardText}>Medicine Management</Text>
+        <Text style={styles.cardText}>Update Drug Stocks</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('ChannelCenters Home')}>
-        <Text style={styles.cardText}>Channel Centers Management</Text>
+        <Text style={styles.cardText}>Channelling Centers</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('AdverticingCardList Home')}>
-        <Text style={styles.cardText}>Medicine Advertising Management</Text>
+        <Text style={styles.cardText}>Publish Advertisements</Text>
       </TouchableOpacity>
     </View>
   );
