@@ -35,8 +35,8 @@ const MedicineManagementHome = () => {
   };
   //
   useEffect(() => {
-    const usersRef = ref(db, "medicines");
-    onValue(usersRef, (snapshot) => {
+    const medicineRef = ref(db, "medicines");
+    onValue(medicineRef, (snapshot) => {
       const medicines = [];
       snapshot.forEach((childSnapshot) => {
         const medicine = {
