@@ -11,40 +11,40 @@ export default function App() {
   const [location, setLocation] = useState('');
   const [name, setName] = useState('');
   const [editRecord, setEditRecord] = useState(null);
+  //
   useEffect(() => {
-    getData();
+    getAllChannelCenters();
   }, []);
-  const handleEdit = async (record) => {
+  //
+  const handleChannelCenterEdit = async (record) => {
     setEditRecord(record);
     setisEditModalVisible(true);
   };
-
-  const getData = async () => {
-    const usersRef = ref(db, "channel");
-
-    onValue(usersRef, (snapshot) => {
-        const users = [];
+//Retrive All channel centers
+  const getAllChannelCenters = async () => {
+    const centersRef = ref(db, "channel");
+    onValue(centersRef, (snapshot) => {
+        const centers = [];
         snapshot.forEach((childSnapshot) => {
-            const user = {
+            const center = {
                 id: childSnapshot.key,
                 ...childSnapshot.val(),
             };
-            users.push(user);
+            centers.push(center);
         });
-        setData(users);
-        // console.log(users)
+        setData(centers);
     });
-    
   };
+  //
   const showConfirmDialog = (id) => {
     return Alert.alert(
       "Are your sure?",
-      "Are you sure you want to Delete this Chanell center? This action cannot be undone!",
+      "Are you sure you want to Delete this Channels center? This action cannot be undone!",
       [
         {
           text: "Yes",
           onPress: () => {
-            handleDelete(id)
+            handleDeleteChannelCenter(id)
           },
         },
         {
@@ -53,18 +53,19 @@ export default function App() {
       ]
     );
 };
-  const handleDelete = async (id) => {
+//Delete channel center
+  const handleDeleteChannelCenter = async (id) => {
     const dbRef = ref(db, 'channel/' + id);
     await remove(dbRef)
       .then(() => {
-        alert("Deleted User Successfully!");
+        alert("Deleted Channel center Successfully!");
       })
       .catch((error) => {
         alert(error.message);
       });
   };
-
-  const handleAdd = async () => {
+//Add new channel
+  const handleChannelCenterAdd = async () => {
     await push(ref(db, 'channel'), {
         location,
         name
@@ -76,7 +77,7 @@ export default function App() {
         alert(error.message)
     });
   };
-
+//update channel center
   const handleUpdateChannel = async () =>{
     const dbRef = ref(db, 'channel/' + editRecord.id);
     await update(dbRef, {
@@ -89,7 +90,6 @@ export default function App() {
       alert(error.message);
     });
   }
-
   return (
     <View style={styles.container}>
       <View style={styles.tableHeader}>
@@ -97,14 +97,12 @@ export default function App() {
           <Text style={styles.addButtonText}>Add</Text>
         </TouchableOpacity>
       </View>
-
       <DataTable>
         <DataTable.Header>
           <DataTable.Title>Location</DataTable.Title>
           <DataTable.Title>Name</DataTable.Title>
           <DataTable.Title>Action</DataTable.Title>
         </DataTable.Header>
-
         {data.map((record) => (
           <DataTable.Row key={record.id}>
             <DataTable.Cell>{record.location}</DataTable.Cell>
@@ -113,48 +111,41 @@ export default function App() {
               <TouchableOpacity style={styles.deleteButton} onPress={() => showConfirmDialog(record.id)}>
                 <Text style={styles.deleteButtonText}>Delete</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.editButton} onPress={() => handleEdit(record)}>
+              <TouchableOpacity style={styles.editButton} onPress={() => handleChannelCenterEdit(record)}>
                 <Text style={styles.deleteButtonText}>Edit</Text>
               </TouchableOpacity>
             </DataTable.Cell>
           </DataTable.Row>
         ))}
       </DataTable>
-
       <Modal visible={isModalVisible} animationType="slide">
         <View style={styles.modal}>
           <Text style={styles.modalTitle}>Add Location</Text>
-
           <TextInput
             style={styles.input}
             placeholder="Location"
             value={location}
             onChangeText={(text) => setLocation(text)}
           />
-
           <TextInput
             style={styles.input}
             placeholder="Name"
             value={name}
             onChangeText={(text) => setName(text)}
           />
-
-          <TouchableOpacity style={styles.addButton} onPress={handleAdd}>
+          <TouchableOpacity style={styles.addButton} onPress={handleChannelCenterAdd}>
             <Text style={styles.addButtonText}>Add</Text>
           </TouchableOpacity>
-
           <TouchableOpacity style={styles.cancelButton} onPress={() => setModalVisible(false)}>
             <Text style={styles.cancelButtonText}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>
-
       <Modal visible={isEditModalVisible} animationType="slide">
   <View style={styles.modal}>
     <Text style={styles.modalTitle}>
       {editRecord ? 'Edit Location' : 'Add Location'}
     </Text>
-
     <TextInput
       style={styles.input}
       placeholder="Location"
@@ -188,7 +179,7 @@ export default function App() {
     </View>
   );
 }
-
+//styles
 const styles = StyleSheet.create({
     container: {
       flex: 1,
