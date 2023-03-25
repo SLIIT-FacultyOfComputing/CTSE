@@ -21,7 +21,7 @@ const CardItem = ({ item, onEdit, onDelete }) => {
             {
               text: "Yes",
               onPress: () => {
-                  DeleteUser(item)
+                  DeleteAD(item)
               },
             },
             {
@@ -30,8 +30,8 @@ const CardItem = ({ item, onEdit, onDelete }) => {
           ]
         );
     };
-    
-    async function DeleteUser(item) {
+    //Delete Advertisment
+    async function DeleteAD(item) {
       console.log(item);
       const dbRef = ref(db, 'advertising/' + item.id);
       await remove(dbRef)
@@ -60,18 +60,18 @@ const CardItem = ({ item, onEdit, onDelete }) => {
     </View>
   );
 };
-
+//
 const AdverticingCardList = ({navigation}) => {
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleEdit = (item) => {
+  const handleADEdit = (item) => {
         setSelectedItem(item);
         setModalVisible(true);
   };
-
-  const handleSave = async() => {
+//Update AD
+  const handleUpdateAD = async() => {
     const dbRef = ref(db, 'advertising/' + selectedItem.id);
     await update(dbRef, {
         company: selectedItem.company,
@@ -82,42 +82,38 @@ const AdverticingCardList = ({navigation}) => {
       alert(error.message);
     });
   };
-
-  const handleDelete = (id) => {
-    setItems(items.filter((item) => item.id !== id));
-  };
+  //Get All AD
   useEffect(() => {
-    const usersRef = ref(db, "advertising");
+    const adRef = ref(db, "advertising");
 
-    onValue(usersRef, (snapshot) => {
-        const users = [];
+    onValue(adRef, (snapshot) => {
+        const ADs = [];
         snapshot.forEach((childSnapshot) => {
-            const user = {
+            const AD = {
                 id: childSnapshot.key,
                 ...childSnapshot.val(),
             };
-            users.push(user);
+            ADs.push(AD);
         });
-        setItems(users);
-        // console.log(users)
+        setItems(ADs);
     });
 }, []);
   return (
     <View style={styles.container}>
               <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('CreateAd')}>
-        <Text style={styles.buttonText}>Add Item</Text>
+        <Text style={styles.buttonText}>Add New AD</Text>
       </TouchableOpacity>
       {items.map((item) => (
         <CardItem
           key={item.id}
           item={item}
-          onEdit={() => handleEdit(item)}
+          onEdit={() => handleADEdit(item)}
           onDelete={() => handleDelete(item.id)}
         />
       ))}
       <Modal visible={modalVisible} animationType="slide">
         <View style={styles.modalContent}>
-          <Text style={styles.modalTitle}>Edit Item</Text>
+          <Text style={styles.modalTitle}>Edit AD</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Company Name"
@@ -134,7 +130,7 @@ const AdverticingCardList = ({navigation}) => {
               setSelectedItem({ ...selectedItem, thumbnail: text })
             }
           />
-          <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <TouchableOpacity style={styles.saveButton} onPress={handleUpdateAD}>
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -147,7 +143,7 @@ const AdverticingCardList = ({navigation}) => {
     </View>
   );
 };
-
+//styles
 const styles = StyleSheet.create({
     container: {
       flex: 1,
