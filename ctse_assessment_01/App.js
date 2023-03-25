@@ -9,6 +9,7 @@ import MyScreen from './screens/MedicineHome';
 import AdverticingCardList from './screens/AdvertisingHome';
 import CreateAd from './screens/CreateNewAdvertising';
 import ChannelCenters from './screens/ChannelCenters';
+import CreateAd from './screens/CreateNewAdvertising';
 
 import SplashScreen from './components/SplashScreen';
 import React, { useState } from 'react';
@@ -38,6 +39,14 @@ export default function App() {
           name='ChannelCenters Home' 
           component={ChannelCenters} 
           options={{title: 'Channel Centers Manage'}}/>
+          <Stack.Screen 
+          name='AdverticingCardList Home' 
+          component={AdverticingCardList} 
+          options={{title: 'Adverticing Manage'}}/>
+                <Stack.Screen 
+          name='CreateAd' 
+          component={CreateAd} 
+          options={{title: 'Create adverticing'}}/>
       <Stack.Screen 
           name='AdverticingCardList Home' 
           component={AdverticingCardList} 
